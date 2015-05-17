@@ -4,6 +4,7 @@ from threading import Thread
 
 from time import sleep
 import json
+import view
 
 
 
@@ -36,7 +37,6 @@ server = MyListener(port, MyHandler)
 connection = None
 
 
-
 def periodic_poll():
     while 1:
         poll()
@@ -50,4 +50,4 @@ thread.start()
 while 1:
     if connection!=None:
         mytxt = sys.stdin.readline().rstrip()
-        connection.do_send({'speak': "agent", 'txt': mytxt})
+        connection.do_send({'speak': "Agent", 'txt': mytxt})

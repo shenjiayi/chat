@@ -3,21 +3,24 @@ import sys
 from threading import Thread
 from time import sleep
 import json
+import view
+from model import chat
 
 myname = raw_input('What is your name? ')
 
 class Client(Handler):
     def on_open(self):
-        print "Hello. Welcome to our store!\n1. Complaint\n2.   Question\n3.    Other\n"
+        view.welcome_message()
 
     def on_close(self):
         pass
     
     def on_msg(self, msg):
         if 'join' in msg:
-            print msg['join'] + " join the chat room!"
+            view.connected()
         else:
-            print msg['speak']+": "+msg['txt']
+            history.add_message("Agent",msg['txt'])
+            view.print_message(msg['speak'],msg['txt'])
 
         
 host, port = 'localhost', 8888
@@ -32,7 +35,25 @@ def periodic_poll():
 thread = Thread(target=periodic_poll)
 thread.daemon = True  # die when the main thread dies 
 thread.start()
+history = chat()
+
+#get info about what question the customer has
+mytxt = sys.stdin.readline().rstrip()
+client.do_send({'speak': myname, 'txt': mytxt})
+view.connected()
+
+
 
 while 1:
     mytxt = sys.stdin.readline().rstrip()
-    client.do_send({'speak': myname, 'txt': mytxt})
+    if mytxt == ":e":
+        view.fun_easter_egg()
+    elif mytxt ==":q":
+        view.goodbye()
+        break
+    elif mytxt ==":s":
+        view.save_history()
+        history.store_message()
+    else:
+        history.add_message("Me",mytxt)
+        client.do_send({'speak': myname, 'txt': mytxt})
