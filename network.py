@@ -155,5 +155,5 @@ def get_my_ip():
 
 
                 
-if __name__ == '__main__':
-    print get_my_ip()
+# if __name__ == '__main__':
+#     print get_my_ip()

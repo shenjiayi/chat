@@ -1,9 +1,11 @@
+import time
+
 class chat:
 	def __init__(self):
 		self.chat = []
 
 	def add_message(self,sender,message):
-		sentence = sender +": "+message
+		sentence = "["+time.asctime()+"]" + "\n" + sender +": "+message
 		self.chat.append(sentence)
 
 	def store_message(self):
