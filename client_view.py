@@ -4,7 +4,7 @@ Hello. Welcome to our store!
 2. Question about orders
 3. Suggestions and Complaint
 4. Other"""
-
+ 
 egg = """
              *     ,MMM8&&&.            *
                   MMMM88&&&&&    .
@@ -38,13 +38,24 @@ def welcome_message():
     print "3. Suggestions and Complaint"
     print "4. Other"
 
+def invalid_choice():
+    print "This is not an option. Please try again!\n"
+
+def invalid_int():
+    print "This is not an int. Please try again!\n"
 
 def connected():
     print "You have been connected to our spcial agent"
+
+def comment_instruction():
     print 'Enter ":q" to quit ":s" to save a copy of the chat ":e" to get a surprise'
 
 def busy():
     print "The server is busy. Please wait......"
+
+def invalid_commend(cmd):
+  print cmd, "is an invalid command!"
+
 
 def fun_easter_egg():
     print egg
