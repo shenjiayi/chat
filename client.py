@@ -7,7 +7,7 @@ from time import sleep
 import json
 import client_view
 from model import chat
-
+import os
  
 class Client(Handler): 
     
@@ -21,7 +21,10 @@ class Client(Handler):
         global busy
         if 'join' in msg:
             client_view.connected()
-
+        elif 'quit' in msg:
+            client_view.not_connected()
+            os._exit(1)
+            
         #change the busy signal when receiving message
         elif 'busy' in msg:
             if msg['busy']=="true":
@@ -97,6 +100,7 @@ def communicate(client):
 
 if __name__ == "__main__":
     #try extablish connection
+
     myname =""
     busy = False;
     host, port = 'localhost', 8888
@@ -107,7 +111,6 @@ if __name__ == "__main__":
 
     #create a model for store messages
     history = chat()
-
     
     sleep(1)
     if busy:

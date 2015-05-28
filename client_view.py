@@ -47,6 +47,10 @@ def invalid_int():
 def connected():
     print "You have been connected to our spcial agent"
 
+def not_connected():
+    print "Connection terminated. Quiting..."
+
+
 def comment_instruction():
     print 'Enter ":q" to quit ":s" to save a copy of the chat ":e" to get a surprise'
 
